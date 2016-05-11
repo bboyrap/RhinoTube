@@ -9,14 +9,15 @@ import org.parceler.Parcels;
 
 public class DetailActivity extends AppCompatActivity {
 
-    public static final String EXTRA_VIDEO = "video";
+
+    public static final String EXTRA_VIDEO = ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        Video video = Parcels.unwrap(getIntent().getParcelableExtra(EXTRA_VIDEO));
+        Video video = Parcels.unwrap(getIntent().getParcelableExtra(Constant.EXTRA_VIDEO));
 
         DetailFragment df = DetailFragment.newInstance(video);
         getSupportFragmentManager()
