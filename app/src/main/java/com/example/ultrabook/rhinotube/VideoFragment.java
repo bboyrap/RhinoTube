@@ -84,8 +84,8 @@ public class VideoFragment extends Fragment {
                 String jsonBody = response.body().string();
                 Log.d("Teste", jsonBody);
                 Gson gson = new Gson();
-                Search search = gson.fromJson(jsonBody, Search.class);
-                return search;
+                //Search search = gson.fromJson(jsonBody, Search.class);
+                return gson.fromJson(jsonBody, Search.class);
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -98,11 +98,9 @@ public class VideoFragment extends Fragment {
 
             if(search != null){
                 mVideos.clear();
-
                 for(Video v : search.getVideos()){
                     mVideos.addAll(search.getVideos());
                 }
-
                 mAdapter.notifyDataSetChanged();
             }
         }

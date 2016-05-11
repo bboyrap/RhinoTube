@@ -2,17 +2,19 @@ package com.example.ultrabook.rhinotube.Model;
 
 import org.parceler.Parcel;
 
-/**
- * Created by ultrabook on 01/05/2016.
- */
 @Parcel
 public class Video {
     String description;
-    String thumbnailURL;
+    String thumbnail;
     String title;
 //    private String id;
     public Video(){
 
+    }
+
+    @Override
+    public String toString() {
+        return "Title: " + title + "\nDescription: " + description;
     }
 
     public Video(String title, String description){
@@ -25,16 +27,15 @@ public class Video {
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getThumbnailURL() {
-        return thumbnailURL;
+    public String getThumbnail() {
+        return thumbnail;
     }
-    public void setThumbnailURL(String thumbnailURL) {
-        this.thumbnailURL = thumbnailURL;
+    public void setThumbnail(String thumbnailURL) {
+        this.thumbnail = thumbnailURL;
     }
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
