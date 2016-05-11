@@ -9,9 +9,6 @@ import org.parceler.Parcels;
 
 public class DetailActivity extends AppCompatActivity {
 
-
-    public static final String EXTRA_VIDEO = ;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

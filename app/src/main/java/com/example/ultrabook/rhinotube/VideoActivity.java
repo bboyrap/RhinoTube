@@ -29,7 +29,7 @@ public class VideoActivity extends AppCompatActivity
         }else {
             Intent it = new Intent(this, DetailActivity.class);
             Parcelable p = Parcels.wrap(video);
-            it.putExtra(DetailActivity.EXTRA_VIDEO, p);
+            it.putExtra(Constant.EXTRA_VIDEO, p);
             startActivity(it);
         }
 
