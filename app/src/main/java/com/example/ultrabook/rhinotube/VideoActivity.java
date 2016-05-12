@@ -24,7 +24,7 @@ public class VideoActivity extends AppCompatActivity
             DetailFragment df = DetailFragment.newInstance(video);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frame_detaill, df, "detail")
+                    .replace(R.id.frame_detaill, df, Constant.DETAIL)
                     .commit();
         }else {
             Intent it = new Intent(this, DetailActivity.class);
@@ -32,6 +32,5 @@ public class VideoActivity extends AppCompatActivity
             it.putExtra(Constant.EXTRA_VIDEO, p);
             startActivity(it);
         }
-
     }
 }

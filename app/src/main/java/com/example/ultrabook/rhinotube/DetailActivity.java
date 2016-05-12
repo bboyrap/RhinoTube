@@ -19,7 +19,7 @@ public class DetailActivity extends AppCompatActivity {
         DetailFragment df = DetailFragment.newInstance(video);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.frame_detaill, df, "detail")
+                .replace(R.id.frame_detaill, df, Constant.DETAIL)
                 .commit();
     }
 }

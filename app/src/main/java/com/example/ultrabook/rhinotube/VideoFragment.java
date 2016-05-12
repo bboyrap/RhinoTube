@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +32,15 @@ public class VideoFragment extends Fragment {
 
     List<Video> mVideos;
     ArrayAdapter<Video> mAdapter;
+    VideoTask mTask;
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+        mVideos = new ArrayList<>();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,20 +49,21 @@ public class VideoFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_video, container, false);
         ButterKnife.bind(this, layout);
 
-        mVideos = new ArrayList<>();
         mAdapter = new ArrayAdapter<>(
                 getActivity(),
                 android.R.layout.simple_list_item_1,
                 mVideos);
         mListView.setAdapter(mAdapter);
-
         return layout;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        new VideoTask().execute();
+        if(mVideos.size() == 0 && (mTask == null)){
+            mTask = new VideoTask();
+            mTask.execute();
+        }
     }
 
     @OnItemClick(R.id.list_video)
@@ -73,18 +82,15 @@ public class VideoFragment extends Fragment {
     class VideoTask extends AsyncTask<Void, Void, Search>{
         @Override
         protected Search doInBackground(Void... params) {
-            String url = "https://dl.dropboxusercontent.com/s/qt8hhfqo0bj02ds/arquivo.json";
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
-                    .url(url)
+                    .url(Constant.URL)
                     .build();
             try {
                 Response response = client.newCall(request).execute();
                 String jsonBody = response.body().string();
-                Log.d("Teste", jsonBody);
                 Gson gson = new Gson();
-                //Search search = gson.fromJson(jsonBody, Search.class);
                 return gson.fromJson(jsonBody, Search.class);
             }catch (Exception e){
                 e.printStackTrace();
