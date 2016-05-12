@@ -16,9 +16,9 @@ import butterknife.ButterKnife;
 public class DetailFragment extends Fragment {
     private static final String EXTRA_VIDEO = "VIDEO";
 
-    @Bind(R.id.text_title)
+    @Bind(R.id.textDetailTitle)
     TextView mTextTitle;
-    @Bind(R.id.text_description)
+    @Bind(R.id.textDetailDescription)
     TextView mTextDescription;
 
     private Video mVideo;

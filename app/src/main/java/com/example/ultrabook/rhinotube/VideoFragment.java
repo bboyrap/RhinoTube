@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,6 @@ public class VideoFragment extends Fragment {
     ArrayAdapter<Video> mAdapter;
     VideoTask mTask;
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,10 +49,7 @@ public class VideoFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_video, container, false);
         ButterKnife.bind(this, layout);
 
-        mAdapter = new ArrayAdapter<>(
-                getActivity(),
-                android.R.layout.simple_list_item_1,
-                mVideos);
+        mAdapter = new VideoAdapter(getContext(),mVideos);
         mListView.setAdapter(mAdapter);
         return layout;
     }
@@ -104,8 +101,11 @@ public class VideoFragment extends Fragment {
 
             if(search != null){
                 mVideos.clear();
+                mVideos.addAll(search.getVideos());
+                Log.d("Teste", "Quantidade de videos da busca: "+search.getVideos().size());
                 for(Video v : search.getVideos()){
-                    mVideos.addAll(search.getVideos());
+//                    mVideos.add(v);
+                    Log.d("Teste", "video: "+v.getTitle());
                 }
                 mAdapter.notifyDataSetChanged();
             }

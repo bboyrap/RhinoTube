@@ -6,12 +6,12 @@
     tools:context="com.example.ultrabook.rhinotube.DetailFragment">
 
     <TextView
-        android:id="@+id/text_title"
+        android:id="@+id/textDetailTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:id="@+id/text_description"
+        android:id="@+id/textDetailDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

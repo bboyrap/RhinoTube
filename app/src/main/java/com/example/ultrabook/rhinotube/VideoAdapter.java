@@ -8,11 +8,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.ultrabook.rhinotube.Model.Video;
 
+import java.util.List;
+
 public class VideoAdapter extends ArrayAdapter<Video> {
-    public VideoAdapter(Context context) {
-        super(context, 0);
+    public VideoAdapter(Context context, List<Video> videos) {
+        super(context, 0, videos);
     }
 
     @Override
@@ -23,10 +26,14 @@ public class VideoAdapter extends ArrayAdapter<Video> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_video, null);
         }
 
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView);
-        TextView textTitle = (TextView) convertView.findViewById(R.id.text_title);
-        TextView textDescription = (TextView) convertView.findViewById(R.id.text_description);
+        ImageView imageView = (ImageView)convertView.findViewById(R.id.imageView);
+        TextView textTitle = (TextView)convertView.findViewById(R.id.textVideoTitle);
+        TextView textDescription = (TextView)convertView.findViewById(R.id.textVideoDescription);
 
-        return super.getView(position, convertView, parent);
+        Glide.with(getContext()).load(video.getThumbnail()).into(imageView);
+        textTitle.setText(video.getTitle());
+        textDescription.setText(video.getDescription());
+
+        return convertView;
     }
 }
