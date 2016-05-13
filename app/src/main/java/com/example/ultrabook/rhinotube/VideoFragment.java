@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,9 @@ public class VideoFragment extends Fragment {
 
     @Bind(R.id.list_video)
     ListView mListView;
+    @Bind(R.id.swipe)
+    SwipeRefreshLayout mSwipe;
+
 
     List<Video> mVideos;
     ArrayAdapter<Video> mAdapter;
@@ -51,6 +55,14 @@ public class VideoFragment extends Fragment {
 
         mAdapter = new VideoAdapter(getContext(),mVideos);
         mListView.setAdapter(mAdapter);
+
+        mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mTask = new VideoTask();
+                mTask.execute();
+            }
+        });
         return layout;
     }
 
@@ -60,7 +72,18 @@ public class VideoFragment extends Fragment {
         if(mVideos.size() == 0 && (mTask == null)){
             mTask = new VideoTask();
             mTask.execute();
+        }else if(mTask != null && mTask.getStatus() == AsyncTask.Status.RUNNING){
+            showProgress();
         }
+    }
+
+    private void showProgress(){
+        mSwipe.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipe.setRefreshing(true);
+            }
+        });
     }
 
     @OnItemClick(R.id.list_video)
@@ -78,6 +101,12 @@ public class VideoFragment extends Fragment {
 
     class VideoTask extends AsyncTask<Void, Void, Search>{
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showProgress();
+        }
+
+        @Override
         protected Search doInBackground(Void... params) {
             OkHttpClient client = new OkHttpClient();
 
@@ -85,6 +114,7 @@ public class VideoFragment extends Fragment {
                     .url(Constant.URL)
                     .build();
             try {
+                Thread.sleep(3000);
                 Response response = client.newCall(request).execute();
                 String jsonBody = response.body().string();
                 Gson gson = new Gson();
@@ -109,6 +139,7 @@ public class VideoFragment extends Fragment {
                 }
                 mAdapter.notifyDataSetChanged();
             }
+            mSwipe.setRefreshing(false);
         }
     }
 

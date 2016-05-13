@@ -13,6 +13,9 @@ import com.example.ultrabook.rhinotube.Model.Video;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class VideoAdapter extends ArrayAdapter<Video> {
     public VideoAdapter(Context context, List<Video> videos) {
         super(context, 0, videos);
@@ -22,18 +25,33 @@ public class VideoAdapter extends ArrayAdapter<Video> {
     public View getView(int position, View convertView, ViewGroup parent) {
         Video video = getItem(position);
 
+        ViewHolder viewHolder;
         if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_video, null);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_video, parent, false);
+            viewHolder = new ViewHolder(convertView);
+        }else{
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        ImageView imageView = (ImageView)convertView.findViewById(R.id.imageView);
-        TextView textTitle = (TextView)convertView.findViewById(R.id.textVideoTitle);
-        TextView textDescription = (TextView)convertView.findViewById(R.id.textVideoDescription);
-
-        Glide.with(getContext()).load(video.getThumbnail()).into(imageView);
-        textTitle.setText(video.getTitle());
-        textDescription.setText(video.getDescription());
+        Glide.with(getContext()).load(video.getThumbnail()).into(viewHolder.imageView);
+        viewHolder.textTitle.setText(video.getTitle());
+        viewHolder.textDescription.setText(video.getDescription());
 
         return convertView;
+    }
+
+    static class ViewHolder{
+        @Bind(R.id.imageView)
+        ImageView imageView;
+        @Bind(R.id.textVideoTitle)
+        TextView textTitle;
+        @Bind(R.id.textVideoDescription)
+        TextView textDescription;
+
+        public ViewHolder(View parent){
+            ButterKnife.bind(this,parent);
+            parent.setTag(this);
+
+        }
     }
 }
