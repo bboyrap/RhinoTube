@@ -22,18 +22,4 @@
         android:layout_toRightOf="@+id/imageView"
         android:layout_toEndOf="@+id/imageView"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/textVideoDescription"
-        android:layout_below="@+id/textVideoTitle"
-        android:layout_toRightOf="@+id/imageView"
-        android:layout_toEndOf="@+id/imageView"/>
-
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:padding="5dp"/>
-
 </RelativeLayout>

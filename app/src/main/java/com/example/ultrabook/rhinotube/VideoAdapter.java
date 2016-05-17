@@ -35,7 +35,6 @@ public class VideoAdapter extends ArrayAdapter<Video> {
 
         Glide.with(getContext()).load(video.getThumbnail()).into(viewHolder.imageView);
         viewHolder.textTitle.setText(video.getTitle());
-        viewHolder.textDescription.setText(video.getDescription());
 
         return convertView;
     }
@@ -45,8 +44,6 @@ public class VideoAdapter extends ArrayAdapter<Video> {
         ImageView imageView;
         @Bind(R.id.textVideoTitle)
         TextView textTitle;
-        @Bind(R.id.textVideoDescription)
-        TextView textDescription;
 
         public ViewHolder(View parent){
             ButterKnife.bind(this,parent);
