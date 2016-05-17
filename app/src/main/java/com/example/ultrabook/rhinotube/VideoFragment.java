@@ -95,10 +95,6 @@ public class VideoFragment extends Fragment {
         }
     }
 
-    public interface TouchVideoListner{
-        void videoWasClicked(Video video);
-    }
-
     class VideoTask extends AsyncTask<Void, Void, Search>{
         @Override
         protected void onPreExecute() {
@@ -114,7 +110,6 @@ public class VideoFragment extends Fragment {
                     .url(Constant.URL)
                     .build();
             try {
-                Thread.sleep(3000);
                 Response response = client.newCall(request).execute();
                 String jsonBody = response.body().string();
                 Gson gson = new Gson();

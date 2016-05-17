@@ -4,22 +4,30 @@ import org.parceler.Parcel;
 
 @Parcel
 public class Video {
-    String description;
-    String thumbnail;
-    String title;
-//    private String id;
-    public Video(){
-
-    }
+    private String description;
+    private String thumbnail;
+    private String title;
+    private long id;
 
     @Override
     public String toString() {
         return "Title: " + title + "\nDescription: " + description;
     }
 
+    public Video(){
+
+    }
+
     public Video(String title, String description){
         this.title = title;
         this.description=description;
+    }
+
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
     }
     public String getDescription() {
         return description;
