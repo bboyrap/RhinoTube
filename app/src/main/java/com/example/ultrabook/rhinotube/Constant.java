@@ -1,7 +1,7 @@
 package com.example.ultrabook.rhinotube;
 
 public class Constant {
-    //parametro das instancias entre intents
+    //Usado para trocar a activity de video e detalhe
     public static final String EXTRA_VIDEO = "video";
 
     //fragment do detalhe
