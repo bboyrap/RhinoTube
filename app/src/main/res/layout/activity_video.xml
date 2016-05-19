@@ -6,6 +6,13 @@
     android:orientation="vertical"
     tools:context="com.example.ultrabook.rhinotube.VideoActivity">
 
+    <!-- Abas everywhere -->
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- ViewPager que vai conter os dois fragmens -->
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"

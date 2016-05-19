@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">RhinoTube</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--ItemVideo-->
     <string name="imgDescription">Description</string>
+
+    <!--TabLayout-->
+    <string name="tabWeb">Web</string>
+    <string name="tabDatabase">Favorites</string>
 </resources>

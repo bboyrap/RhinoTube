@@ -1,8 +1,9 @@
 package com.example.ultrabook.rhinotube;
 
 public class Constant {
-    //Usado para trocar a activity de video e detalhe
+    //Layouts
     public static final String EXTRA_VIDEO = "video";
+    public static final String EXTRA_TABLAYOUT = "tabLayout";
 
     //fragment do detalhe
     public static final String DETAIL = "detail";
@@ -18,6 +19,5 @@ public class Constant {
     public static final String DB_TITLE       = "title";
     public static final String DB_THUMBNAIL   = "thumbnail";
     public static final String DB_DESCRIPTION = "description";
-
 
 }
