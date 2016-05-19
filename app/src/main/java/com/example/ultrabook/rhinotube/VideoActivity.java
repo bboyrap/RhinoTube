@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.example.ultrabook.rhinotube.Model.Video;
 
@@ -26,12 +27,16 @@ public class VideoActivity extends AppCompatActivity
     ViewPager mViewPager;
     @Bind(R.id.tabLayout)
     TabLayout mTabLayout;
+    @Bind(R.id.toolBar)
+    Toolbar mToolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
         ButterKnife.bind(this);
+
+        setSupportActionBar(mToolBar);
 
         //Adapter para trazer os fragments para o viewPager
         mViewPager.setAdapter(new VideoPager(getSupportFragmentManager()));
