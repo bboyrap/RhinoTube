@@ -22,7 +22,7 @@ public class VideoDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE "+ Constant.DB_TABLE + "(" +
-                Constant.DB_ID          + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                Constant.DB_ID          + " TEXT PRIMARY KEY," +
                 Constant.DB_TITLE       + " TEXT NOT NULL," +
                 Constant.DB_THUMBNAIL   + " TEXT NOT NULL," +
                 Constant.DB_DESCRIPTION + " TEXT NOT NULL)");

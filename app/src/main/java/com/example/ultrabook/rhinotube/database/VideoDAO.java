@@ -27,7 +27,7 @@ public class VideoDAO {
         this.mContext = context;
     }
 
-    public long insert(Video video){
+    public String inserir(Video video){
         VideoDbHelper helper = new VideoDbHelper(mContext);
         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -35,7 +35,7 @@ public class VideoDAO {
 
         //Instrução de inserir na tabela, os valores desejados
         //retornando o id(primary Key) do registro inserido
-        long id = db.insert(Constant.DB_TABLE, null, values);
+        String id = String.valueOf(db.insert(Constant.DB_TABLE, null, values));
 
         video.setId(id);
         db.close();
@@ -43,7 +43,7 @@ public class VideoDAO {
         return id;
     }
 
-    public List<Video> read(){
+    public List<Video> listar(){
         VideoDbHelper helper = new VideoDbHelper(mContext);
         //Como só eh feito leitura, usasse o metodo getReadableDatabase.
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -68,7 +68,7 @@ public class VideoDAO {
             while (cursor.moveToNext()) {
                 Video video = new Video();
                 //Pega a informacao de acordo com o tipo de dado
-                video.setId(cursor.getLong(idxId));
+                video.setId(cursor.getString(idxId));
                 video.setTitle(cursor.getString(idxTitle));
                 video.setThumbnail(cursor.getString(idxThumbnail));
                 video.setDescription(cursor.getString(idxDescription));
@@ -115,6 +115,7 @@ public class VideoDAO {
 
     private ContentValues valuesVideo(Video video){
         ContentValues values = new ContentValues();
+        values.put(Constant.DB_ID, video.getId());
         values.put(Constant.DB_TITLE, video.getTitle());
         values.put(Constant.DB_THUMBNAIL, video.getThumbnail());
         values.put(Constant.DB_DESCRIPTION, video.getDescription());

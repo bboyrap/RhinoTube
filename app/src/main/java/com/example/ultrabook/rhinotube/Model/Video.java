@@ -7,7 +7,7 @@ public class Video {
     private String description;
     private String thumbnail;
     private String title;
-    private long id;
+    private String id;
 
     @Override
     public String toString() {
@@ -23,10 +23,10 @@ public class Video {
         this.description=description;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
     public String getDescription() {
