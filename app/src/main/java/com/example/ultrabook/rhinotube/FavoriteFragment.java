@@ -13,6 +13,8 @@ import android.widget.ListView;
 import com.example.ultrabook.rhinotube.Model.Video;
 import com.example.ultrabook.rhinotube.database.VideoDAO;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.List;
 
 import butterknife.Bind;
@@ -34,6 +36,13 @@ public class FavoriteFragment extends Fragment {
         setRetainInstance(true);
         mDao = new VideoDAO(getActivity());
         mVideos = mDao.getList();
+        ((VideoApp)getActivity().getApplication()).getEventBus().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ((VideoApp)getActivity().getApplication()).getEventBus().unregister(this);
     }
 
     @Override
@@ -56,4 +65,14 @@ public class FavoriteFragment extends Fragment {
             listner.videoWasClicked(video);
         }
     }
+
+    @Subscribe
+    public void refresh(Video video){
+        mVideos.clear();
+        mVideos.addAll(mDao.getList());
+        mAdapter.notifyDataSetChanged();
+
+    }
+
+
 }

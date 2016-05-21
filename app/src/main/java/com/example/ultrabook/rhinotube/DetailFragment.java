@@ -95,6 +95,7 @@ public class DetailFragment extends Fragment {
                     //Senao adiciona
                     mDao.insert(mVideo);
                 }
+                ((VideoApp)getActivity().getApplication()).getEventBus().post(mVideo);
                 return false;
         }
         return super.onOptionsItemSelected(item);
