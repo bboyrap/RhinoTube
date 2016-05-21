@@ -5,8 +5,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.ultrabook.rhinotube.Model.Video;
 
 import org.parceler.Parcels;
@@ -16,6 +18,8 @@ import butterknife.ButterKnife;
 public class DetailFragment extends Fragment {
     private static final String EXTRA_VIDEO = "VIDEO";
 
+    @Bind(R.id.imgDetail)
+    ImageView mImgDetail;
     @Bind(R.id.textDetailTitle)
     TextView mTextTitle;
     @Bind(R.id.textDetailDescription)
@@ -48,6 +52,7 @@ public class DetailFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_detail, container, false);
 
         ButterKnife.bind(this, view);
+        Glide.with(getContext()).load(mVideo.getThumbnail()).into(mImgDetail);
         mTextTitle.setText(mVideo.getTitle());
         mTextDescription.setText(mVideo.getDescription());
         return view;

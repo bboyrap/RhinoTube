@@ -15,7 +15,8 @@
 
         <!--Necessário o uso da theme appCompat.NoActionBar para utilização da toolBar-->
         <activity android:name=".VideoActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/AppTheme.NoTitle"
+            android:launchMode="singleTop">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailActivity"/>
+        <activity android:name=".DetailActivity"
+            android:parentActivityName=".VideoActivity">
+            <meta-data android:name="parentActivityName"
+                android:value=".VideoActivity"/>
+        </activity>
+
     </application>
 
 </manifest>
