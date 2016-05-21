@@ -36,7 +36,12 @@ public class VideoActivity extends AppCompatActivity
         setContentView(R.layout.activity_video);
         ButterKnife.bind(this);
 
+        //usado para adicionar a ToolBar como barra de ações,
+        //já que desativamos a actionBar manualmente no manifest
         setSupportActionBar(mToolBar);
+
+        //Colocando o item na toolbar para adcionar aos favoritos.
+
 
         //Adapter para trazer os fragments para o viewPager
         mViewPager.setAdapter(new VideoPager(getSupportFragmentManager()));

@@ -7,4 +7,5 @@
     <!--TabLayout-->
     <string name="tabWeb">Web</string>
     <string name="tabDatabase">Favorites</string>
+    <string name="addFavorite">Add to Favorite</string>
 </resources>

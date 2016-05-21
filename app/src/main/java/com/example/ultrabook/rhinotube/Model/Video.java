@@ -4,10 +4,10 @@ import org.parceler.Parcel;
 
 @Parcel
 public class Video {
-    private String description;
-    private String thumbnail;
-    private String title;
-    private String id;
+    String description;
+    String thumbnail;
+    String title;
+    String id;
 
     @Override
     public String toString() {
