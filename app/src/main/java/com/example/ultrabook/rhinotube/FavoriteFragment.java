@@ -33,7 +33,7 @@ public class FavoriteFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         mDao = new VideoDAO(getActivity());
-        mVideos = mDao.listar();
+        mVideos = mDao.getList();
     }
 
     @Override

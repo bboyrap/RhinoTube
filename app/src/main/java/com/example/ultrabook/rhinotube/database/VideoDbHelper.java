@@ -9,7 +9,7 @@ import com.example.ultrabook.rhinotube.Constant;
 -
 Para alterar a estrutura do banco já criada, temos que:
 Alterar a versão do banco (Constant.DB_VERSION).
-Fazer a alteração das estruturas, inserir campos, renomear, etc.
+Fazer a alteração das estruturas, insert campos, renomear, etc.
 No onUpgrade: if(oldVersion == 1) db.execSQL("ALTER TABLE bla bla...)
 */
 public class VideoDbHelper extends SQLiteOpenHelper {

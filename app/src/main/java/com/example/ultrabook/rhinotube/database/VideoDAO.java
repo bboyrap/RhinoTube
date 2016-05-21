@@ -19,7 +19,7 @@ Criamos o objeto ContentValues passando o nome das colunas e os respectivos valo
 -
 Sempre apos pegar a instância do baanco deve-se fechar a mesma.
 */
-public class VideoDAO {
+public class  VideoDAO {
 
     private Context mContext;
 
@@ -27,29 +27,25 @@ public class VideoDAO {
         this.mContext = context;
     }
 
-    public String inserir(Video video){
-        VideoDbHelper helper = new VideoDbHelper(mContext);
-        SQLiteDatabase db = helper.getWritableDatabase();
+    public String insert(Video video){
 
         ContentValues values = valuesVideo(video);
 
-        //Instrução de inserir na tabela, os valores desejados
+        //Instrução de insert na tabela, os valores desejados
         //retornando o id(primary Key) do registro inserido
-        String id = String.valueOf(db.insert(Constant.DB_TABLE, null, values));
+        String id = String.valueOf(getWritableDatabase().insert(Constant.DB_TABLE, null, values));
 
         video.setId(id);
-        db.close();
+        getWritableDatabase().close();
 
         return id;
     }
 
-    public List<Video> listar(){
-        VideoDbHelper helper = new VideoDbHelper(mContext);
-        //Como só eh feito leitura, usasse o metodo getReadableDatabase.
-        SQLiteDatabase db = helper.getReadableDatabase();
+    public List<Video> getList(){
+
 
         //Faz uma busca no banco de dados retornando um cursor da tabela desejada.
-        Cursor cursor = db.rawQuery("SELECT * FROM " + Constant.DB_TABLE, null);
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + Constant.DB_TABLE, null);
         List<Video> list = new ArrayList<>();
 
         //Para saber se o cursor está vazio antes de processar os dados.
@@ -77,38 +73,34 @@ public class VideoDAO {
             }
         }
         cursor.close();
-        db.close();
+        getReadableDatabase().close();
         return list;
     }
 
     public int update(Video video){
-        VideoDbHelper helper = new VideoDbHelper(mContext);
-        SQLiteDatabase db = helper.getWritableDatabase();
+
 
         ContentValues values = valuesVideo(video);
 
         //Altera a tabela, passando os valores, e usando o 3 parametrô como o WHERE
         //Lembrando que cada "?" vai ser substituido pela posição respectiva do array
         //Retornando a quantidade de registros afetados
-        int rowsAffected = db.update(Constant.DB_TABLE, values,
+        int rowsAffected = getWritableDatabase().update(Constant.DB_TABLE, values,
                 Constant.DB_ID + " = ?",
                 new String[]{String.valueOf(video.getId())});
 
-        db.close();
+        getWritableDatabase().close();
 
         return rowsAffected;
     }
 
     public int delete(Video video){
-        VideoDbHelper helper = new VideoDbHelper(mContext);
-        SQLiteDatabase db = helper.getWritableDatabase();
-
         //Retornando a quantidade de registros afetados
-        int rowsAffected = db.delete(Constant.DB_TABLE,
+        int rowsAffected = getWritableDatabase().delete(Constant.DB_TABLE,
                 Constant.DB_ID + " = ?",
                 new String[]{String.valueOf(video.getId())});
 
-        db.close();
+        getWritableDatabase().close();
 
         return rowsAffected;
     }
@@ -121,6 +113,32 @@ public class VideoDAO {
         values.put(Constant.DB_DESCRIPTION, video.getDescription());
 
         return values;
+    }
+
+    public boolean isFavorite(Video video){
+        Cursor cursor = getReadableDatabase().rawQuery(
+            "SELECT COUNT(*) FROM " + Constant.DB_TABLE +
+                " WHERE " + Constant.DB_ID + " = ?",
+                new String[]{video.getId()}
+        );
+
+        boolean result = false;
+        if(cursor != null){
+            cursor.moveToNext();
+            result = cursor.getInt(0) > 0;
+            cursor.close();
+        }
+        getReadableDatabase().close();
+        return result;
+    }
+
+    private SQLiteDatabase getReadableDatabase(){
+        VideoDbHelper helper = new VideoDbHelper(mContext);
+        return helper.getReadableDatabase();
+    }
+    private SQLiteDatabase getWritableDatabase(){
+        VideoDbHelper helper = new VideoDbHelper(mContext);
+        return helper.getWritableDatabase();
     }
 
 }

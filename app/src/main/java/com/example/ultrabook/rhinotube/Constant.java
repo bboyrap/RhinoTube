@@ -10,7 +10,7 @@ public class Constant {
 
     //Json do dropblox.
     //public static final String URL = "https://dl.dropboxusercontent.com/s/1a1y9ir3k0k911x/arquivo.json";
-    public static final String URL = "https://api.myjson.com/bins/1bsw4";
+    public static final String URL = "https://dl.dropboxusercontent.com/s/ssugfbxknrellue/arquivo.json";
 
     //-- DATABASE AREA --//
     public static final int DB_VERSION        = 1;

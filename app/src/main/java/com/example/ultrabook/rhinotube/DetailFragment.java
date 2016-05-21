@@ -1,8 +1,12 @@
 package com.example.ultrabook.rhinotube;
+
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -10,8 +14,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.ultrabook.rhinotube.Model.Video;
+import com.example.ultrabook.rhinotube.database.VideoDAO;
 
 import org.parceler.Parcels;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -24,6 +30,8 @@ public class DetailFragment extends Fragment {
     TextView mTextTitle;
     @Bind(R.id.textDetailDescription)
     TextView mTextDescription;
+
+    VideoDAO mDao;
 
     private Video mVideo;
 
@@ -39,6 +47,11 @@ public class DetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mDao = new VideoDAO(getActivity());
+
+        //Necessário para a chamada do onCreateOptionsMenu
+        setHasOptionsMenu(true);
+
         if (getArguments() != null) {
             Parcelable p = getArguments().getParcelable(EXTRA_VIDEO);
             mVideo = Parcels.unwrap(p);
@@ -59,9 +72,32 @@ public class DetailFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_video, menu);
+    }
+
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.favorite:
+                if(mDao.isFavorite(mVideo)){
+                    //Se for favorito remove
+                    mDao.delete(mVideo);
+                }else{
+                    //Senao adiciona
+                    mDao.insert(mVideo);
+                }
+                return false;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
