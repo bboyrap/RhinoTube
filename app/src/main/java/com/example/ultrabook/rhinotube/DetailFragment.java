@@ -31,9 +31,12 @@ public class DetailFragment extends Fragment {
     @Bind(R.id.textDetailDescription)
     TextView mTextDescription;
 
+    private MenuItem mMenu;
+
     VideoDAO mDao;
 
     private Video mVideo;
+
 
     public static DetailFragment newInstance(Video video) {
         DetailFragment fragment = new DetailFragment();
@@ -71,10 +74,22 @@ public class DetailFragment extends Fragment {
         return view;
     }
 
+    private void changeIcon() {
+        if(mDao.isFavorite(mVideo)){
+            mMenu.setIcon(R.drawable.ic_add);
+        }else{
+            mMenu.setIcon(R.drawable.ic_remove);
+        }
+    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_video, menu);
+        //Pesquisar como trocar Meno
+        mMenu = menu.findItem(R.id.favorite_icon);
+        changeIcon();
+
     }
 
 
@@ -87,7 +102,7 @@ public class DetailFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.favorite:
+            case R.id.favorite_icon:
                 if(mDao.isFavorite(mVideo)){
                     //Se for favorito remove
                     mDao.delete(mVideo);
@@ -95,6 +110,7 @@ public class DetailFragment extends Fragment {
                     //Senao adiciona
                     mDao.insert(mVideo);
                 }
+                changeIcon();
                 ((VideoApp)getActivity().getApplication()).getEventBus().post(mVideo);
                 return false;
         }
