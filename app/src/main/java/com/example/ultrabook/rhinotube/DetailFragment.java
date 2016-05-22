@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.ultrabook.rhinotube.Model.Video;
@@ -76,9 +77,10 @@ public class DetailFragment extends Fragment {
 
     private void changeIcon() {
         if(mDao.isFavorite(mVideo)){
-            mMenu.setIcon(R.drawable.ic_add);
+            mMenu.setIcon(R.drawable.ic_favorite);
+
         }else{
-            mMenu.setIcon(R.drawable.ic_remove);
+            mMenu.setIcon(R.drawable.ic_unavorite);
         }
     }
 
@@ -106,9 +108,11 @@ public class DetailFragment extends Fragment {
                 if(mDao.isFavorite(mVideo)){
                     //Se for favorito remove
                     mDao.delete(mVideo);
+                    Toast.makeText(getActivity(), R.string.delFavorite, Toast.LENGTH_SHORT).show();
                 }else{
                     //Senao adiciona
                     mDao.insert(mVideo);
+                    Toast.makeText(getActivity(), R.string.favorite, Toast.LENGTH_SHORT).show();
                 }
                 changeIcon();
                 ((VideoApp)getActivity().getApplication()).getEventBus().post(mVideo);

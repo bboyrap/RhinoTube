@@ -4,9 +4,14 @@
     <!--ItemVideo-->
     <string name="imgDescription">Description</string>
 
-    <!--TabLayout-->
+    <!--ActivityVideo - TabLayout-->
     <string name="tabWeb">Web</string>
     <string name="tabDatabase">Favorites</string>
-    <string name="addFavorite">Add to Favorite</string>
+
+    <!--DetailFragment-->
     <string name="detail">Details</string>
+    <!--FavoriteFragment-->
+    <string name="addFavorite">Add to Favorite</string>
+    <string name="delFavorite">Removed from Removed</string>
+    <string name="favorite">Added to Favorite</string>
 </resources>
