@@ -60,20 +60,23 @@ public class VideoActivity extends AppCompatActivity
             //Instancia a video fragment (json)
             if(position == 0){
                 return new VideoFragment();
+            }else if(position == 1 ){
+                return new FavoriteFragment();
             }
+            return null;
+
             //instancia a favorite fragment (SQLite)
-            return new FavoriteFragment();
         }
 
         //Metodo necessário para retornar o titulo referente a cada aba do TabLayout
-
-
         @Override
         public CharSequence getPageTitle(int position) {
             if(position == 0){
                 return getString(R.string.tabWeb);
+            }else if(position == 1){
+                return getString(R.string.tabFavorite);
             }
-            return getString(R.string.tabDatabase);
+            return getString(R.string.tabSearch);
         }
 
         //Quantidade de abas do ViewPager

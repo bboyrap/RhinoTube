@@ -35,7 +35,6 @@ public class  VideoDAO {
         //retornando o id(primary Key) do registro inserido
         String id = String.valueOf(getWritableDatabase().insert(Constant.DB_TABLE, null, values));
 
-        video.setId(id);
         getWritableDatabase().close();
 
         return id;

@@ -1,17 +1,19 @@
 <resources>
     <string name="app_name">RhinoTube</string>
 
-    <!--ItemVideo-->
+    <!--Fragment Detail-->
     <string name="imgDescription">Description</string>
 
     <!--ActivityVideo - TabLayout-->
     <string name="tabWeb">Web</string>
-    <string name="tabDatabase">Favorites</string>
+    <string name="tabFavorite">Favorites</string>
 
     <!--DetailFragment-->
+    <string name="favorite">Add/Remove</string>
     <string name="detail">Details</string>
+
     <!--FavoriteFragment-->
     <string name="addFavorite">Add to Favorite</string>
-    <string name="delFavorite">Removed from Removed</string>
-    <string name="favorite">Added to Favorite</string>
+    <string name="removeFavorite">Removed from Favorite</string>
+    <string name="tabSearch">Search</string>
 </resources>

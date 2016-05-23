@@ -38,7 +38,6 @@ public class DetailFragment extends Fragment {
 
     private Video mVideo;
 
-
     public static DetailFragment newInstance(Video video) {
         DetailFragment fragment = new DetailFragment();
         Bundle args = new Bundle();
@@ -88,12 +87,9 @@ public class DetailFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_video, menu);
-        //Pesquisar como trocar Meno
         mMenu = menu.findItem(R.id.favorite_icon);
         changeIcon();
-
     }
-
 
     @Override
     public void onDestroyView() {
@@ -108,11 +104,11 @@ public class DetailFragment extends Fragment {
                 if(mDao.isFavorite(mVideo)){
                     //Se for favorito remove
                     mDao.delete(mVideo);
-                    Toast.makeText(getActivity(), R.string.delFavorite, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.removeFavorite, Toast.LENGTH_SHORT).show();
                 }else{
                     //Senao adiciona
                     mDao.insert(mVideo);
-                    Toast.makeText(getActivity(), R.string.favorite, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.addFavorite, Toast.LENGTH_SHORT).show();
                 }
                 changeIcon();
                 ((VideoApp)getActivity().getApplication()).getEventBus().post(mVideo);
