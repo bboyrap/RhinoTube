@@ -63,7 +63,7 @@ public class VideoActivity extends AppCompatActivity
             }else if(position == 1 ){
                 return new FavoriteFragment();
             }
-            return null;
+            return new SearchFragment();
 
             //instancia a favorite fragment (SQLite)
         }
@@ -82,7 +82,7 @@ public class VideoActivity extends AppCompatActivity
         //Quantidade de abas do ViewPager
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     }
 

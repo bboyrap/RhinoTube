@@ -16,4 +16,7 @@
     <string name="addFavorite">Add to Favorite</string>
     <string name="removeFavorite">Removed from Favorite</string>
     <string name="tabSearch">Search</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="searchHere">Search the video here!</string>
 </resources>

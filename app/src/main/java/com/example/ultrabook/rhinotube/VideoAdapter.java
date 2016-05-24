@@ -32,7 +32,6 @@ public class VideoAdapter extends ArrayAdapter<Video> {
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
         Glide.with(getContext()).load(video.getThumbnail()).into(viewHolder.imageView);
         viewHolder.textTitle.setText(video.getTitle());
 
