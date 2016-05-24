@@ -7,13 +7,28 @@
     android:orientation="vertical"
     tools:context="com.example.ultrabook.rhinotube.VideoActivity">
 
-    <!--ToolBar usada para acoplar o TabLayout junto ao menu do topo-->
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolBar"
+
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/primary"
-        app:titleTextColor="@android:color/white"/>
+        android:layout_height="wrap_content"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <!--ToolBar usada para acoplar o TabLayout junto ao menu do topo-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"/>
+
+        <!--Usado para dar aopio as trânsições das abas-->
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMaxWidth="0dp"
+            app:tabMode="fixed"
+            app:tabGravity="fill"/>
+
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:baselineAligned="false"
@@ -26,12 +41,6 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <!--Usado para dar aopio as trânsições das abas-->
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
             <!-- ViewPager que vai conter os dois fragmens -->
             <android.support.v4.view.ViewPager
