@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.ultrabook.rhinotube.Model.Video;
+import com.example.ultrabook.rhinotube.model.Video;
 import com.example.ultrabook.rhinotube.database.VideoDAO;
 
 import org.parceler.Parcels;

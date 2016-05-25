@@ -1,10 +1,8 @@
-package com.example.ultrabook.rhinotube.Model;
+package com.example.ultrabook.rhinotube.model;
 
 import java.util.List;
 
-/**
- * Created by ultrabook on 04/05/2016.
- */
+
 public class Search {
 
     private List<Video> videos;

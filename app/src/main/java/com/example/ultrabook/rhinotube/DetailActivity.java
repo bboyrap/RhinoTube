@@ -3,7 +3,7 @@ package com.example.ultrabook.rhinotube;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.ultrabook.rhinotube.Model.Video;
+import com.example.ultrabook.rhinotube.model.Video;
 
 import org.parceler.Parcels;
 

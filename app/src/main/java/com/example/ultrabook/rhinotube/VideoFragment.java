@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.ultrabook.rhinotube.Model.Search;
-import com.example.ultrabook.rhinotube.Model.Video;
+import com.example.ultrabook.rhinotube.model.Search;
+import com.example.ultrabook.rhinotube.model.Video;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

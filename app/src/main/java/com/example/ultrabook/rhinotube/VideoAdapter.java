@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.ultrabook.rhinotube.Model.Video;
+import com.example.ultrabook.rhinotube.model.Video;
 
 import java.util.List;
 

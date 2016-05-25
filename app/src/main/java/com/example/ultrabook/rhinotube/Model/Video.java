@@ -1,4 +1,4 @@
-package com.example.ultrabook.rhinotube.Model;
+package com.example.ultrabook.rhinotube.model;
 
 import org.parceler.Parcel;
 

@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.ultrabook.rhinotube.Constant;
-import com.example.ultrabook.rhinotube.Model.Video;
+import com.example.ultrabook.rhinotube.model.Video;
 
 import java.util.ArrayList;
 import java.util.List;
