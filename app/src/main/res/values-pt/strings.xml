@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">RhinoTube</string>
+
+    <!--Fragment Detail-->
+    <string name="imgDescription">descrição</string>
+
+    <!--ActivityVideo - TabLayout-->
+    <string name="tabWeb">web</string>
+    <string name="tabFavorite">favoritos</string>
+
+    <!--DetailFragment-->
+    <string name="favorite">adicionar/remover</string>
+    <string name="detail">detalhes</string>
+
+    <!--FavoriteFragment-->
+    <string name="addFavorite">adicionado aos favoritos</string>
+    <string name="removeFavorite">removido dos favoritos</string>
+
+    <string name="networkFail">erro ao conectar, tente mais tarde</string>
+
+    <string name="emptyList">a lista está vazia</string>
+</resources>

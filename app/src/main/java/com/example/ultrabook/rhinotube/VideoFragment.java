@@ -1,6 +1,9 @@
 package com.example.ultrabook.rhinotube;
 
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.ultrabook.rhinotube.model.Search;
 import com.example.ultrabook.rhinotube.model.Video;
@@ -33,7 +37,8 @@ public class VideoFragment extends Fragment {
     ListView mListView;
     @Bind(R.id.swipe)
     SwipeRefreshLayout mSwipe;
-
+    @Bind(R.id.empty)
+    View mEmpty;
 
     List<Video> mVideos;
     ArrayAdapter<Video> mAdapter;
@@ -54,13 +59,15 @@ public class VideoFragment extends Fragment {
         ButterKnife.bind(this, layout);
 
         mAdapter = new VideoAdapter(getContext(),mVideos);
+
+        mListView.setEmptyView(mEmpty);
+
         mListView.setAdapter(mAdapter);
 
         mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mTask = new VideoTask();
-                mTask.execute();
+                loadJson();
             }
         });
         return layout;
@@ -70,11 +77,27 @@ public class VideoFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if(mVideos.size() == 0 && (mTask == null)){
-            mTask = new VideoTask();
-            mTask.execute();
+            loadJson();
         }else if(mTask != null && mTask.getStatus() == AsyncTask.Status.RUNNING){
             showProgress();
         }
+    }
+
+    private void loadJson(){
+        //para verificar se possui internet
+        ConnectivityManager cm = (ConnectivityManager)getActivity()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = cm.getActiveNetworkInfo();
+        if(info != null && info.isConnected()){
+            mTask = new VideoTask();
+            mTask.execute();
+        } else{
+            mSwipe.setRefreshing(false);
+            Toast.makeText(getActivity(), R.string.networkFail, Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
 
     private void showProgress(){
@@ -133,6 +156,11 @@ public class VideoFragment extends Fragment {
                     Log.d("Teste", "video: "+v.getTitle());
                 }
                 mAdapter.notifyDataSetChanged();
+
+                //se for tablet exibe o primeiro item
+                if(getResources().getBoolean(R.bool.tablet) && mVideos.size() > 0){
+                    onItemSelected(0);
+                }
             }
             mSwipe.setRefreshing(false);
         }

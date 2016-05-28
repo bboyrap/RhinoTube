@@ -2,21 +2,21 @@
     <string name="app_name">RhinoTube</string>
 
     <!--Fragment Detail-->
-    <string name="imgDescription">Description</string>
+    <string name="imgDescription">description</string>
 
     <!--ActivityVideo - TabLayout-->
-    <string name="tabWeb">Web</string>
-    <string name="tabFavorite">Favorites</string>
+    <string name="tabWeb">web</string>
+    <string name="tabFavorite">favorites</string>
 
     <!--DetailFragment-->
-    <string name="favorite">Add/Remove</string>
-    <string name="detail">Details</string>
+    <string name="favorite">add/remove</string>
+    <string name="detail">details</string>
 
     <!--FavoriteFragment-->
-    <string name="addFavorite">Add to Favorite</string>
-    <string name="removeFavorite">Removed from Favorite</string>
-    <string name="tabSearch">Search</string>
+    <string name="addFavorite">added to favorite</string>
+    <string name="removeFavorite">removed from favorite</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="searchHere">Search the video here!</string>
+    <string name="networkFail">fail to connect, try again later.</string>
+
+    <string name="emptyList">this list is empty</string>
 </resources>

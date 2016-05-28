@@ -58,14 +58,11 @@ public class VideoActivity extends AppCompatActivity
         @Override
         public Fragment getItem(int position) {
             //Instancia a video fragment (json)
-            if(position == 0){
+            if(position == 0) {
                 return new VideoFragment();
-            }else if(position == 1 ){
-                return new FavoriteFragment();
             }
-            return new SearchFragment();
+            return new FavoriteFragment();
 
-            //instancia a favorite fragment (SQLite)
         }
 
         //Metodo necessário para retornar o titulo referente a cada aba do TabLayout
@@ -73,16 +70,14 @@ public class VideoActivity extends AppCompatActivity
         public CharSequence getPageTitle(int position) {
             if(position == 0){
                 return getString(R.string.tabWeb);
-            }else if(position == 1){
-                return getString(R.string.tabFavorite);
             }
-            return getString(R.string.tabSearch);
+            return getString(R.string.tabFavorite);
         }
 
         //Quantidade de abas do ViewPager
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
     }
 

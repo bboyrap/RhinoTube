@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.ultrabook.rhinotube.VideoFragment">
 
+    <include layout="@layout/empty_list"/>
+
     <ListView
         android:id="@+id/list_video"
         android:layout_width="match_parent"

@@ -25,6 +25,8 @@ public class FavoriteFragment extends Fragment {
 
     @Bind(R.id.list_video)
     ListView mListView;
+    @Bind(R.id.empty)
+    View mEmpty;
 
     List<Video> mVideos;
     ArrayAdapter<Video> mAdapter;
@@ -53,6 +55,9 @@ public class FavoriteFragment extends Fragment {
         ButterKnife.bind(this, layout);
 
         mAdapter = new VideoAdapter(getContext(),mVideos);
+
+        mListView.setEmptyView(mEmpty);
+
         mListView.setAdapter(mAdapter);
         return layout;
     }
