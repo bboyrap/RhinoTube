@@ -53,8 +53,8 @@ public class FavoriteFragment extends Fragment {
 
         View layout = inflater.inflate(R.layout.fragment_favorite, container, false);
         ButterKnife.bind(this, layout);
-
-        mAdapter = new VideoAdapter(getContext(),mVideos);
+//TODO: getActivity ou getContext
+        mAdapter = new VideoAdapter(getActivity(),mVideos);
 
         mListView.setEmptyView(mEmpty);
 

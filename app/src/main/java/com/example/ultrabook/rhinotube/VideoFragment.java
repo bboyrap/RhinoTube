@@ -54,11 +54,13 @@ public class VideoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+//        Usando o layout como carivável para pegar os componentes
         View layout = inflater.inflate(R.layout.fragment_video, container, false);
         ButterKnife.bind(this, layout);
 
-        mAdapter = new VideoAdapter(getContext(),mVideos);
+//        Ao setar o adpter o fragment não herda de contexto(this)
+// TODO: getContext ou getActivity?
+        mAdapter = new VideoAdapter(getActivity(),mVideos);
 
         mListView.setEmptyView(mEmpty);
 
@@ -95,9 +97,6 @@ public class VideoFragment extends Fragment {
             mSwipe.setRefreshing(false);
             Toast.makeText(getActivity(), R.string.networkFail, Toast.LENGTH_SHORT).show();
         }
-
-
-
     }
 
     private void showProgress(){
@@ -109,9 +108,14 @@ public class VideoFragment extends Fragment {
         });
     }
 
+//    Se gato herda de animal, logo o gato eh um animal
     @OnItemClick(R.id.list_video)
     void onItemSelected(int position){
         Video video = mVideos.get(position);
+//        Todos fragment está dentro de uma activity,
+// e se a activity implementa o clickVideoListner ela é um clickNoLivroListner
+// Então já que implementa apenas, precisamos chamar, sendo assim na livro activity
+// Implementando a interface, ela ira ser notificada.
         if(getActivity() instanceof TouchVideoListner){
             TouchVideoListner listner = (TouchVideoListner)getActivity();
             listner.videoWasClicked(video);

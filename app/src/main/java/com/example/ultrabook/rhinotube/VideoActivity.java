@@ -40,15 +40,14 @@ public class VideoActivity extends AppCompatActivity
         //já que desativamos a actionBar manualmente no manifest
         setSupportActionBar(mToolBar);
 
-        //Colocando o item na toolbar para adcionar aos favoritos.
-
-
-        //Adapter para trazer os fragments para o viewPager
+//      Usando o viewPager por que ele tem duas abas
         mViewPager.setAdapter(new VideoPager(getSupportFragmentManager()));
+//      Usado para faze as abas
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
-    class VideoPager extends FragmentPagerAdapter{
+//    Usado para montar as duas abas que irá ter na tela
+    private class VideoPager extends FragmentPagerAdapter{
 
         public VideoPager(FragmentManager fm) {
             super(fm);
@@ -62,7 +61,6 @@ public class VideoActivity extends AppCompatActivity
                 return new VideoFragment();
             }
             return new FavoriteFragment();
-
         }
 
         //Metodo necessário para retornar o titulo referente a cada aba do TabLayout
@@ -82,6 +80,7 @@ public class VideoActivity extends AppCompatActivity
     }
 
 
+//    Usado para abrir o fragment de detalhe passando assim a ter o objeto
     @Override
     public void videoWasClicked(Video video) {
         if(getResources().getBoolean(R.bool.tablet)){

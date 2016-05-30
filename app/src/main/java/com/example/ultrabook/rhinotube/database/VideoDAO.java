@@ -20,7 +20,6 @@ Criamos o objeto ContentValues passando o nome das colunas e os respectivos valo
 Sempre apos pegar a instância do baanco deve-se fechar a mesma.
 */
 public class  VideoDAO {
-
     private Context mContext;
 
     public VideoDAO(Context context){
@@ -28,25 +27,18 @@ public class  VideoDAO {
     }
 
     public String insert(Video video){
-
         ContentValues values = valuesVideo(video);
-
         //Instrução de insert na tabela, os valores desejados
         //retornando o id(primary Key) do registro inserido
         String id = String.valueOf(getWritableDatabase().insert(Constant.DB_TABLE, null, values));
-
         getWritableDatabase().close();
-
         return id;
     }
 
     public List<Video> getList(){
-
-
         //Faz uma busca no banco de dados retornando um cursor da tabela desejada.
         Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + Constant.DB_TABLE, null);
         List<Video> list = new ArrayList<>();
-
         //Para saber se o cursor está vazio antes de processar os dados.
         if(cursor.getCount() > 0) {
             //Para saber o indice da coluna e ganhar perfomance no lugar de repetir
@@ -55,7 +47,6 @@ public class  VideoDAO {
             int idxTitle = cursor.getColumnIndex(Constant.DB_TITLE);
             int idxThumbnail = cursor.getColumnIndex(Constant.DB_THUMBNAIL);
             int idxDescription = cursor.getColumnIndex(Constant.DB_DESCRIPTION);
-
             //Inicialmente o cursor não é apontado para nenhuma posição.
             //Quando usado o moveToNext() ele passa para o primeiro registro
             //Se não tiver nenhum registro, é retornado falso e pronto, rs.
@@ -67,7 +58,6 @@ public class  VideoDAO {
                 video.setTitle(cursor.getString(idxTitle));
                 video.setThumbnail(cursor.getString(idxThumbnail));
                 video.setDescription(cursor.getString(idxDescription));
-
                 list.add(video);
             }
         }
@@ -77,10 +67,7 @@ public class  VideoDAO {
     }
 
     public int update(Video video){
-
-
         ContentValues values = valuesVideo(video);
-
         //Altera a tabela, passando os valores, e usando o 3 parametrô como o WHERE
         //Lembrando que cada "?" vai ser substituido pela posição respectiva do array
         //Retornando a quantidade de registros afetados

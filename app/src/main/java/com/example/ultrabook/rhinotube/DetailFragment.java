@@ -23,8 +23,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class DetailFragment extends Fragment {
-    private static final String EXTRA_VIDEO = "VIDEO";
-
     @Bind(R.id.imgDetail)
     ImageView mImgDetail;
     @Bind(R.id.textDetailTitle)
@@ -38,15 +36,17 @@ public class DetailFragment extends Fragment {
 
     private Video mVideo;
 
+//    recebe um livro como parametro e armazena no bundle e coloca no setArguments
     public static DetailFragment newInstance(Video video) {
         DetailFragment fragment = new DetailFragment();
         Bundle args = new Bundle();
         Parcelable p = Parcels.wrap(video);
-        args.putParcelable(EXTRA_VIDEO, p);
+        args.putParcelable(Constant.EXTRA_VIDEO, p);
         fragment.setArguments(args);
         return fragment;
     }
 
+//    Faz a leitura do paramêtro passado no arguments
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,17 +56,17 @@ public class DetailFragment extends Fragment {
         setHasOptionsMenu(true);
 
         if (getArguments() != null) {
-            Parcelable p = getArguments().getParcelable(EXTRA_VIDEO);
+            Parcelable p = getArguments().getParcelable(Constant.EXTRA_VIDEO);
             mVideo = Parcels.unwrap(p);
         }
     }
 
+//    Vai setar os valores na interface gráfica
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_detail, container, false);
-
         ButterKnife.bind(this, view);
         Glide.with(getContext()).load(mVideo.getThumbnail()).into(mImgDetail);
         mTextTitle.setText(mVideo.getTitle());

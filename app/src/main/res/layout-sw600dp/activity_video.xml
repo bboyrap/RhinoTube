@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.ultrabook.rhinotube.VideoActivity">
+    tools:context="com.example.ultrabook.rhinotube.VideoActivity"
+    android:divider="?android:attr/dividerHorizontal">
 
 
     <android.support.design.widget.AppBarLayout

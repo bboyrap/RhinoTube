@@ -2,7 +2,7 @@ package com.example.ultrabook.rhinotube;
 
 public class Constant {
     //Layouts
-    public static final String EXTRA_VIDEO = "video";
+    public static final String EXTRA_VIDEO = "VIDEO";
     public static final String EXTRA_TABLAYOUT = "tabLayout";
 
     //fragment do detalhe
