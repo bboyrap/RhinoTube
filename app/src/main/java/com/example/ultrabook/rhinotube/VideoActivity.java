@@ -17,12 +17,20 @@ import org.parceler.Parcels;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 /*
-!Actvity Principal da execução do aplicativo!
+    Activity principal da aplicação, responsável por controlar os fragments.
 -
+Usamos o setSupportActionBar() já que retiramos a ActionBar da aplicação substituindo pela Toolbar.
+-
+O setupWithViewPager(), é usado para adicionar o viewPager() as abas.
+-
+Usamos o viewPager para vai trabalhar em conjunto com o tabLayout.
+-
+No videoWasClicked() verificamos se o aparelho é um tablet, para poder abrir uma novo fragment.
+-
+O VideoPager extend de FragmentPagerAdapter pois cada pagina vai ser um fragment.
 */
 public class VideoActivity extends AppCompatActivity
     implements TouchVideoListner {
-
     @Bind(R.id.viewPager)
     ViewPager mViewPager;
     @Bind(R.id.tabLayout)
@@ -35,35 +43,23 @@ public class VideoActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
         ButterKnife.bind(this);
-
-        //usado para adicionar a ToolBar como barra de ações,
-        //já que desativamos a actionBar manualmente no manifest
         setSupportActionBar(mToolBar);
-
-//      Usando o viewPager por que ele tem duas abas
         mViewPager.setAdapter(new VideoPager(getSupportFragmentManager()));
-//      Usado para faze as abas
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
-//    Usado para montar as duas abas que irá ter na tela
     private class VideoPager extends FragmentPagerAdapter{
-
         public VideoPager(FragmentManager fm) {
             super(fm);
         }
-
-        //Onde intancia as páginas do viewPager
         @Override
         public Fragment getItem(int position) {
-            //Instancia a video fragment (json)
             if(position == 0) {
                 return new VideoFragment();
             }
             return new FavoriteFragment();
         }
 
-        //Metodo necessário para retornar o titulo referente a cada aba do TabLayout
         @Override
         public CharSequence getPageTitle(int position) {
             if(position == 0){
@@ -72,15 +68,12 @@ public class VideoActivity extends AppCompatActivity
             return getString(R.string.tabFavorite);
         }
 
-        //Quantidade de abas do ViewPager
         @Override
         public int getCount() {
             return 2;
         }
     }
 
-
-//    Usado para abrir o fragment de detalhe passando assim a ter o objeto
     @Override
     public void videoWasClicked(Video video) {
         if(getResources().getBoolean(R.bool.tablet)){

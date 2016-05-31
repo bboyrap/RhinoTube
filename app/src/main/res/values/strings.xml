@@ -10,7 +10,7 @@
 
     <!--DetailFragment-->
     <string name="favorite">add/remove</string>
-    <string name="detail">details</string>
+    <string name="detail">Details</string>
 
     <!--FavoriteFragment-->
     <string name="addFavorite">added to favorite</string>
@@ -18,5 +18,5 @@
 
     <string name="networkFail">fail to connect, try again later.</string>
 
-    <string name="emptyList">this list is empty</string>
+    <string name="emptyList">Oops, the list is empty :(</string>
 </resources>

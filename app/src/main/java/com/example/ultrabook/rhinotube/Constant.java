@@ -1,24 +1,23 @@
 package com.example.ultrabook.rhinotube;
 
 public class Constant {
-    //Layouts
+    //-- DETAIL FRAGMENT --//
     public static final String EXTRA_VIDEO = "VIDEO";
-    public static final String EXTRA_TABLAYOUT = "tabLayout";
 
-    //fragment do detalhe
-    public static final String DETAIL = "detail";
+    //-- FRAGMENT DETALHE --//
+    public static final String DETAIL = "DETAIL";
 
-    //Json do dropblox.
+    //-- URL JSON DROPBOX --//
     //public static final String URL = "https://dl.dropboxusercontent.com/s/1a1y9ir3k0k911x/arquivo.json";
     public static final String URL = "https://dl.dropboxusercontent.com/s/ssugfbxknrellue/arquivo.json";
 
     //-- DATABASE AREA --//
     public static final int DB_VERSION        = 1;
-    public static final String DB_NAME        = "database";
-    public static final String DB_TABLE       = "videos";
-    public static final String DB_ID          = "id";
-    public static final String DB_TITLE       = "title";
-    public static final String DB_THUMBNAIL   = "thumbnail";
-    public static final String DB_DESCRIPTION = "description";
+    public static final String DB_NAME        = "DATABASE";
+    public static final String DB_TABLE       = "VIDEOS";
+    public static final String DB_ID          = "ID";
+    public static final String DB_TITLE       = "TITLE";
+    public static final String DB_THUMBNAIL   = "THUMBNAIL";
+    public static final String DB_DESCRIPTION = "DESCRIPTION";
 
 }

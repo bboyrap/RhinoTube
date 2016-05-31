@@ -1,5 +1,4 @@
 package com.example.ultrabook.rhinotube.model;
-
 import org.parceler.Parcel;
 
 @Parcel
@@ -9,20 +8,13 @@ public class Video {
     String title;
     String id;
 
-    @Override
-    public String toString() {
-        return "Title: " + title + "\nDescription: " + description;
-    }
-
     public Video(){
 
     }
-
     public Video(String title, String description){
         this.title = title;
         this.description=description;
     }
-
     public String getId() {
         return id;
     }

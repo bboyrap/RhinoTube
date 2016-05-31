@@ -1,5 +1,4 @@
 package com.example.ultrabook.rhinotube;
-
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
@@ -21,7 +20,15 @@ import org.parceler.Parcels;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
+/*
+    Fragment de detalhe que mostra as informações do vídeo seleiconado na lista.
+-
+No onCreateView é carregado o arquivo de layout do fragment.
+-
+Usamos um método consrutor para criar uma instância do fragment, recebendo um vídeo como parâmetro.
+-
+Usamos o setArguments() para poder armazenar o vídeo e recupera-lo no onCreate com o getArguments().
+*/
 public class DetailFragment extends Fragment {
     @Bind(R.id.imgDetail)
     ImageView mImgDetail;
@@ -29,14 +36,10 @@ public class DetailFragment extends Fragment {
     TextView mTextTitle;
     @Bind(R.id.textDetailDescription)
     TextView mTextDescription;
-
     private MenuItem mMenu;
-
     VideoDAO mDao;
-
     private Video mVideo;
 
-//    recebe um livro como parametro e armazena no bundle e coloca no setArguments
     public static DetailFragment newInstance(Video video) {
         DetailFragment fragment = new DetailFragment();
         Bundle args = new Bundle();
@@ -46,26 +49,20 @@ public class DetailFragment extends Fragment {
         return fragment;
     }
 
-//    Faz a leitura do paramêtro passado no arguments
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDao = new VideoDAO(getActivity());
-
-        //Necessário para a chamada do onCreateOptionsMenu
         setHasOptionsMenu(true);
-
         if (getArguments() != null) {
             Parcelable p = getArguments().getParcelable(Constant.EXTRA_VIDEO);
             mVideo = Parcels.unwrap(p);
         }
     }
 
-//    Vai setar os valores na interface gráfica
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_detail, container, false);
         ButterKnife.bind(this, view);
         Glide.with(getContext()).load(mVideo.getThumbnail()).into(mImgDetail);
@@ -77,7 +74,6 @@ public class DetailFragment extends Fragment {
     private void changeIcon() {
         if(mDao.isFavorite(mVideo)){
             mMenu.setIcon(R.drawable.ic_favorite);
-
         }else{
             mMenu.setIcon(R.drawable.ic_unavorite);
         }
@@ -92,21 +88,13 @@ public class DetailFragment extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.favorite_icon:
                 if(mDao.isFavorite(mVideo)){
-                    //Se for favorito remove
                     mDao.delete(mVideo);
                     Toast.makeText(getActivity(), R.string.removeFavorite, Toast.LENGTH_SHORT).show();
                 }else{
-                    //Senao adiciona
                     mDao.insert(mVideo);
                     Toast.makeText(getActivity(), R.string.addFavorite, Toast.LENGTH_SHORT).show();
                 }
@@ -116,6 +104,10 @@ public class DetailFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
 }
-
-

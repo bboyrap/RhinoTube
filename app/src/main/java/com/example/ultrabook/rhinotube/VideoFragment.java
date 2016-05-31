@@ -1,6 +1,5 @@
 package com.example.ultrabook.rhinotube;
 
-
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,16 +28,33 @@ import butterknife.OnItemClick;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
+/*
+    Fragment responsável por listar todos os vídeos resolvidos pela web(json)
+-
+No onCreateView() é carregado o arquivo de layout do fragment.
+-
+No onActivityCreated() verificamos se a lista ja está carregada ou se a task está executando.
+-
+No loadJson() é chamado no createView(), ou no swipe do usuário para atualizar a lista.
+-
+No onItemSelected() se gato herda de animal, então gato é um animal, rs.
+Fazendo com que a activity registrada, trate o evento.
+-
+Usamos a assyncTask() para realizar o processamento em segundo plano, sem interromper a IOThread.
+Sabendo que outras threads não podem atualizar diretamente a IOThrad.
+Sendo necessário utilizar 3 tipos de parâmetros, sendo eles:
+1º Parâmetro de entrada da assyncTask(que vai ser usado no doInBackground())
+2º Usado para mostrar o progresso de execução da thread.
+3º Identifica o tipo de retorno da assyncTask(retornado no postExecute().
+O único método obrigatório da assyncTask() é o doInBackground().
+*/
 public class VideoFragment extends Fragment {
-
     @Bind(R.id.list_video)
     ListView mListView;
     @Bind(R.id.swipe)
     SwipeRefreshLayout mSwipe;
     @Bind(R.id.empty)
     View mEmpty;
-
     List<Video> mVideos;
     ArrayAdapter<Video> mAdapter;
     VideoTask mTask;
@@ -54,18 +69,11 @@ public class VideoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        Usando o layout como carivável para pegar os componentes
         View layout = inflater.inflate(R.layout.fragment_video, container, false);
         ButterKnife.bind(this, layout);
-
-//        Ao setar o adpter o fragment não herda de contexto(this)
-// TODO: getContext ou getActivity?
-        mAdapter = new VideoAdapter(getActivity(),mVideos);
-
+        mAdapter = new VideoAdapter(getContext(),mVideos);
         mListView.setEmptyView(mEmpty);
-
         mListView.setAdapter(mAdapter);
-
         mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -86,7 +94,6 @@ public class VideoFragment extends Fragment {
     }
 
     private void loadJson(){
-        //para verificar se possui internet
         ConnectivityManager cm = (ConnectivityManager)getActivity()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
@@ -108,14 +115,9 @@ public class VideoFragment extends Fragment {
         });
     }
 
-//    Se gato herda de animal, logo o gato eh um animal
     @OnItemClick(R.id.list_video)
     void onItemSelected(int position){
         Video video = mVideos.get(position);
-//        Todos fragment está dentro de uma activity,
-// e se a activity implementa o clickVideoListner ela é um clickNoLivroListner
-// Então já que implementa apenas, precisamos chamar, sendo assim na livro activity
-// Implementando a interface, ela ira ser notificada.
         if(getActivity() instanceof TouchVideoListner){
             TouchVideoListner listner = (TouchVideoListner)getActivity();
             listner.videoWasClicked(video);
@@ -132,15 +134,14 @@ public class VideoFragment extends Fragment {
         @Override
         protected Search doInBackground(Void... params) {
             OkHttpClient client = new OkHttpClient();
-
             Request request = new Request.Builder()
                     .url(Constant.URL)
                     .build();
             try {
                 Response response = client.newCall(request).execute();
-                String jsonBody = response.body().string();
+                String json = response.body().string();
                 Gson gson = new Gson();
-                return gson.fromJson(jsonBody, Search.class);
+                return gson.fromJson(json, Search.class);
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -150,18 +151,10 @@ public class VideoFragment extends Fragment {
         @Override
         protected void onPostExecute(Search search) {
             super.onPostExecute(search);
-
             if(search != null){
                 mVideos.clear();
                 mVideos.addAll(search.getVideos());
-                Log.d("Teste", "Quantidade de videos da busca: "+search.getVideos().size());
-                for(Video v : search.getVideos()){
-//                    mVideos.add(v);
-                    Log.d("Teste", "video: "+v.getTitle());
-                }
                 mAdapter.notifyDataSetChanged();
-
-                //se for tablet exibe o primeiro item
                 if(getResources().getBoolean(R.bool.tablet) && mVideos.size() > 0){
                     onItemSelected(0);
                 }
@@ -170,4 +163,9 @@ public class VideoFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
 }

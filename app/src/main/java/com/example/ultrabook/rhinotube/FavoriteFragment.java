@@ -1,6 +1,4 @@
 package com.example.ultrabook.rhinotube;
-
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,14 +18,23 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
+/*
+    Fragment de favoritos, mostra os registros que foram armazenados no banco.
+-
+No onCreate registramos o fragment para caso o usuário remova um vídeo do banco.
+-
+No onCreateView é carregado o arquivo de layout do fragment.
+-
+No onItemSelectd passamos o video da lista para a VideoActivity tratar(abrir o fragment de detalhe).
+-
 
+
+*/
 public class FavoriteFragment extends Fragment {
-
     @Bind(R.id.list_video)
     ListView mListView;
     @Bind(R.id.empty)
     View mEmpty;
-
     List<Video> mVideos;
     ArrayAdapter<Video> mAdapter;
     VideoDAO mDao;
@@ -42,22 +49,12 @@ public class FavoriteFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ((VideoApp)getActivity().getApplication()).getEventBus().unregister(this);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View layout = inflater.inflate(R.layout.fragment_favorite, container, false);
         ButterKnife.bind(this, layout);
-//TODO: getActivity ou getContext
         mAdapter = new VideoAdapter(getActivity(),mVideos);
-
         mListView.setEmptyView(mEmpty);
-
         mListView.setAdapter(mAdapter);
         return layout;
     }
@@ -76,8 +73,18 @@ public class FavoriteFragment extends Fragment {
         mVideos.clear();
         mVideos.addAll(mDao.getList());
         mAdapter.notifyDataSetChanged();
-
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ((VideoApp)getActivity().getApplication()).getEventBus().unregister(this);
+    }
 
 }

@@ -8,12 +8,11 @@
     <application
         android:name=".VideoApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--Necessário o uso da theme appCompat.NoActionBar para utilização da toolBar-->
         <activity android:name=".VideoActivity"
             android:theme="@style/AppTheme.NoTitle"
             android:launchMode="singleTop">

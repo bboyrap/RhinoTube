@@ -5,20 +5,21 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.ultrabook.rhinotube.Constant;
 /*
-!Classe responsável por criar o banco de dados, ou alterar!
+    Classe responsável por criar o banco de dados, ou alterar
 -
 Para alterar a estrutura do banco já criada, temos que:
 Alterar a versão do banco (Constant.DB_VERSION).
 Fazer a alteração das estruturas, insert campos, renomear, etc.
 No onUpgrade: if(oldVersion == 1) db.execSQL("ALTER TABLE bla bla...)
+-
+onCreate é Chamado apenas uma vez, para a criação da estrutura do banco de dados, tabelas, etc.
+onUpgrade Usado quando necessário fazer uma atualização da estrutura do banco
 */
 public class VideoDbHelper extends SQLiteOpenHelper {
-    //Nome e Versão do banco
     public VideoDbHelper(Context context) {
         super(context, Constant.DB_NAME, null, Constant.DB_VERSION);
     }
 
-    //Chamada apenas uma vez, para a criação da estrutura do banco de dados, tabelas, etc.
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE "+ Constant.DB_TABLE + "(" +
@@ -28,9 +29,8 @@ public class VideoDbHelper extends SQLiteOpenHelper {
                 Constant.DB_DESCRIPTION + " TEXT NOT NULL)");
     }
 
-    //Usado quando necessário fazer uma atualização da estrutura do banco
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
 }
